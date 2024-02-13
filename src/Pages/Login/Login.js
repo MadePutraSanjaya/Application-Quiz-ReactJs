@@ -2,16 +2,22 @@ import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import "./Login.css";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [username, setUsername] = useState("");
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleLogin = () => {
     if (username.trim() !== "") {
       localStorage.setItem("username", username.trim());
-      history.push('/quiz')
+
+      const userHistory =
+        JSON.parse(localStorage.getItem(`history_${username}`)) || [];
+
+      localStorage.setItem(`history_${username}`, JSON.stringify(userHistory));
+
+      navigate("/home");
     } else {
       alert("Please enter a username");
     }
@@ -32,9 +38,13 @@ function Login() {
       />
 
       <div className="login">
-      <Button variant="contained" className="loginButton" onClick={handleLogin}>
-        Next
-      </Button>
+        <Button
+          variant="contained"
+          className="loginButton"
+          onClick={handleLogin}
+        >
+          Next
+        </Button>
       </div>
     </div>
   );

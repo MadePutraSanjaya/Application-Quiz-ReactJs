@@ -4,8 +4,9 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  scrollbar-width: thin; /* Firefox */
+  scrollbar-width: thin; 
 }
+
 
 *::-webkit-scrollbar {
   width: 8px;
@@ -19,8 +20,8 @@ a {
 
 .app {
   /* background-color: white; */
-  margin: 5px;
-  padding: 5px;
+  margin: 5px 0;
+  padding: 5px 0;
 }
 
 .mainImg {

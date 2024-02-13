@@ -1,0 +1,16 @@
+.history-card {
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.history-card .MuiCardContent-root {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.history-card .MuiTypography-root {
+  color: #333;
+}
