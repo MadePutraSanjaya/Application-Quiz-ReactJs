@@ -3,18 +3,32 @@ import "./App.css";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Login from "./Pages/Login/Login";
 import Header, { WelcomeLogin } from "./Components/Header/Headers";
-import Home from './Pages/Home/Home';
-import Quiz from './Pages/Quiz/Quiz';
-import Result from './Pages/Result/Result';
-import Container from '@mui/material/Container';
+import Home from "./Pages/Home/Home";
+import Quiz from "./Pages/Quiz/Quiz";
+import Result from "./Pages/Result/Result";
+import Container from "@mui/material/Container";
+import axios from "axios";
 
 const App = () => {
   const location = useLocation();
   const isQuizPage = location.pathname === "/quiz";
-  const [question, setQuestion] = useState('')
+  const [questions, setQuestions] = useState("");
   const [score, setScore] = useState(0);
 
-  const fetchQuestions = () => {};
+  const fetchQuestions = async (category = "", difficulty = "") => {
+    try {
+      const { data } = await axios.get(
+        `https://opentdb.com/api.php?amount=10${
+          category && `&category=${category}`
+        }${difficulty && `&difficulty=${difficulty}`}&type=multiple`
+      );
+      console.log(data);
+
+      setQuestions(data.results);
+    } catch (error) {
+      console.error("Error Fetch Question");
+    }
+  };
 
   return (
     <>
@@ -29,7 +43,17 @@ const App = () => {
             path="/home"
             element={<Home fetchQuestions={fetchQuestions} />}
           />
-          <Route path="/quiz" element={<Quiz />} />
+          <Route
+            path="/quiz"
+            element={
+              <Quiz
+                questions={questions}
+                setQuestions={setQuestions}
+                score={score}
+                setScore={setScore}
+              />
+            }
+          />
           <Route path="/result" element={<Result />} />
         </Routes>
       </Container>

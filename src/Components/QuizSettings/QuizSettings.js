@@ -11,18 +11,23 @@ import { useNavigate } from "react-router-dom";
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
 const QuizSettings = ({ fetchQuestions }) => {
-  const [categories, setCategories] = useState("");
+  const [category, setCategory] = useState("");
   const [difficulty, setDifficulty] = useState("");
   const [error, setError] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = () => {
-    if (!categories || !difficulty) {
+    if (!category || !difficulty) {
       setError(true);
       return;
     } else {
       setError(false);
-      fetchQuestions(categories, difficulty);
+      const username = localStorage.getItem("username");
+      localStorage.setItem(
+        `${username}_settings`,
+        JSON.stringify({ category, difficulty })
+      );
+      fetchQuestions(category, difficulty);
       navigate("/quiz");
     }
   };
@@ -39,10 +44,10 @@ const QuizSettings = ({ fetchQuestions }) => {
               <InputLabel id="category">Select Category</InputLabel>
               <Select
                 labelId="category"
-                id="categories"
+                id="category"
                 label="Select Category"
-                onChange={(e) => setCategories(e.target.value)}
-                value={categories}
+                onChange={(e) => setCategory(e.target.value)}
+                value={category}
               >
                 {Categories.map((category) => (
                   <MenuItem key={category.category} value={category.value}>
