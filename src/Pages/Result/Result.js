@@ -13,7 +13,7 @@ const Result = ({ score }) => {
         color="secondary"
         size="large"
         style={{ alignSelf: "center", marginTop: 20 }}
-        href="/"
+        href="/home"
       >
         Go to homepage
       </Button>

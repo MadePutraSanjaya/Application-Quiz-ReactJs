@@ -12,6 +12,7 @@ import axios from "axios";
 const App = () => {
   const location = useLocation();
   const isQuizPage = location.pathname === "/quiz";
+  const isLoginPage = location.pathname === "/";
   const [questions, setQuestions] = useState("");
   const [score, setScore] = useState(0);
 
@@ -34,7 +35,7 @@ const App = () => {
     <>
       <Container>
         <div className="app">
-          {isQuizPage && <Header />} <WelcomeLogin />
+          {isQuizPage && <Header />} {!isLoginPage && <WelcomeLogin />} 
         </div>
 
         <Routes>

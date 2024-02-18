@@ -13,7 +13,7 @@ const Home = ({ fetchQuestions }) => {
   return (
     <>
       <QuizSettings fetchQuestions={fetchQuestions} />
-      <h1>History</h1>
+      {/* <h1>History</h1> */}
       {history.length > 0 ? (
         history.map((entry, index) => (
           <Card key={index} className="history-card">
@@ -31,7 +31,8 @@ const Home = ({ fetchQuestions }) => {
           </Card>
         ))
       ) : (
-        <p>No history available</p>
+        // <p>No history available</p>
+        <></>
       )}
     </>
   );
